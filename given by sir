@@ -1,0 +1,56 @@
+<?php
+// ​
+// class database
+// {
+//     private $db;
+//     function __construct(){
+//         $servername = "localhost";
+//         $username = "root";
+//         $password = "";
+// ​
+//         try {
+//         $this->db = new PDO("mysql:host=$servername;dbname=tute_pdo", $username, $password);
+//         // set the PDO error mode to exception
+//         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//         echo "Connected successfully";
+//         } catch(PDOException $e) {
+//         echo "Connection failed: " . $e->getMessage();
+//         }
+//     }
+// ​
+//     function checkUserExist($email){
+//         $query = $this->db->prepare('select * from users where email = ?');
+//         $query->execute([$email]);
+//         if ($query->rowCount() > 0) {
+//             return true;
+//         }
+//         return false;
+//     }
+//     function insert($data){
+//         try {
+//             $query = $this->db->prepare('insert into users (name, email, password, status)values(:name, :email, :password, :status)');
+//             if ($query->execute($data)) {
+//                 return true;
+//             }
+//             throw new Exception("Record could not add", 1);
+//         } catch (\Throwable $th) {
+//             throw $th;
+//         }
+//     }
+//     function find($id){
+//         $query = $this->db->prepare('select * from users where id = ?');
+//         $query->execute([$id]);
+//         return $query->fetch(PDO::FETCH_ASSOC);
+//     }
+// ​
+//     function update($data, $id){
+//         $data['id']= $id;
+//         $query = $this->db->prepare('update users set name = :name, email = :email, password = :password, status = :status where id = :id');
+//         return $query->execute([$data]);
+//     }
+//     function delete($id){
+//         $query = $this->db->prepare('delete from users where id = ?');
+//         return $query->execute([$id]);
+//     }
+// }
+?>
