@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <!-- hello world -->
+    <p id="paragraph" >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, in doloremque doloribus sequi molestias temporibus quae. Eligendi quasi earum eum est cum nobis, id, rem corrupti veniam sint, non eaque.
+    </p>
+
+    <div id="selectedWords">
+      <h2>Selected Words:</h2>
+      <ul></ul>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Get the paragraph element
+        var paragraph = $("#paragraph");
+
+        // Split the paragraph into words
+        var words = paragraph.text().split(" ");
+        
+
+        // Clear the original content of the paragraph
+        paragraph.empty();
+
+        // Initialize array to store clicked words
+        var clickedWords = [];
+
+        // Iterate through each word and wrap it in a span
+        for (var i = 0; i < words.length; i++) {
+          var span = $("<span>" + words[i] + " </span>");
+          paragraph.append(span);
+        }
+
+        // Add click event to each word
+        paragraph.on("dblclick", "span", function () {
+          // Toggle the highlight class
+          $(this).toggleClass("highlight");
+
+          // Get the clicked word
+          var clickedWord = $(this).text().trim();
+
+          // Check if the word is already in the array
+          var index = clickedWords.indexOf(clickedWord);
+
+          // If the word is not in the array, add it
+          if (index === -1) {
+            clickedWords.push(clickedWord);
+          } 
+          else {
+            // If the word is in the array, remove it
+            clickedWords.splice(index, 1);
+          }
+
+          // Update the list of selected words
+          updateSelectedWordsList();
+        });
+
+        // Function to update the list of selected words
+        function updateSelectedWordsList() {
+          var selectedWordsList = $("#selectedWords ul");
+          selectedWordsList.empty();
+
+          // Add each clicked word to the list
+          for (var i = 0; i < clickedWords.length; i++) {
+            selectedWordsList.append("<li>" + clickedWords[i] + "</li>");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

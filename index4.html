@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Task</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Drag and Drop Task</h1>
+    <div>
+        <p>
+            Lorem ipsum dolor, <input id="upperInput1" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"> amet consectetur adipisicing elit. Dolor dolorum <input id="upperInput2" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"> doloremque! Consectetur eum delectus quaerat <input id="upperInput3" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"> dolore assumenda! At provident ut doloribus ducimus id <input id="upperInput4" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"> quos ipsum recusandae natus?
+        </p>
+    </div>
+
+    <div>
+        <h1>
+            <input id="lowerInputA" type="text" value="A" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            &nbsp;&nbsp;
+            <input id="lowerInputB" type="text" value="B" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            &nbsp;&nbsp;
+            <input id="lowerInputC" type="text" value="C" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            &nbsp;&nbsp;
+            <input id="lowerInputD" type="text" value="D" maxlength="1" size="1" readonly draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </h1>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+    
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.value);
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var targetInput = event.target;
+    
+            // Check if the target is an input element
+            if (targetInput.tagName === "INPUT") {
+                targetInput.value = data;
+    
+                // Clear the source input only if the target is in the upper section
+                if (targetInput.id.startsWith("upperInput")) {
+                    clearSourceInput(event);
+                }
+            }
+        }
+    
+        function clearSourceInput(event) {
+            // Find the source input based on the dragged data
+            var sourceInput = document.querySelector('input[value="' + event.dataTransfer.getData("text") + '"]');
+            if (sourceInput) {
+                sourceInput.value = "";
+    
+                // Check if the source input is from the lower section and remove it
+                if (sourceInput.id.startsWith("lowerInput")) {
+                    sourceInput.parentNode.removeChild(sourceInput);
+                }
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,9 @@
+    /* Add some margin to the input elements for space */
+    input {
+        margin-right: 10px; /* Adjust the value based on your preference */
+    }
+
+    /* Add some margin to the h1 elements for space */
+    h1 {
+        margin-bottom: 20px; /* Adjust the value based on your preference */
+    }
